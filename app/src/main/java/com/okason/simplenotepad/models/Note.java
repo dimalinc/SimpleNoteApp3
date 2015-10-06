@@ -28,7 +28,7 @@ public class Note {
         return displayDate;
     }
 
-    public static Note fromCursor(Cursor cursor){
+    public static Note getNotefromCursor(Cursor cursor){
         Note note = new Note();
         note.setId(cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_ID)));
         note.setTitle(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_TITLE)));

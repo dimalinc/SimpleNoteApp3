@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.okason.simplenotepad.R;
+import com.okason.simplenotepad.fragments.NotePlainEditorFragment;
 
 public class NoteEditorActivity extends AppCompatActivity {
 
@@ -23,6 +24,17 @@ public class NoteEditorActivity extends AppCompatActivity {
         mToolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //remove this line in the MainActivity.java
+
+        if (savedInstanceState == null){
+            Bundle args = getIntent().getExtras();
+            if (args != null && args.containsKey("id")){
+                long id = args.getLong("id", 0);
+                if (id > 0){
+                    openFragment(NotePlainEditorFragment.newInstance(id), "Editor");
+                }
+            }
+            openFragment(NotePlainEditorFragment.newInstance(0), "Editor");
+        }
     }
 
     @Override

@@ -16,8 +16,8 @@ import com.melnykov.fab.FloatingActionButton;
 import com.okason.simplenotepad.R;
 import com.okason.simplenotepad.activities.NoteEditorActivity;
 import com.okason.simplenotepad.adapter.NoteListAdapter;
+import com.okason.simplenotepad.data.NoteManager;
 import com.okason.simplenotepad.models.Note;
-import com.okason.simplenotepad.utilities.SampleData;
 
 import java.util.List;
 
@@ -83,9 +83,8 @@ public class NoteListFragment extends Fragment {
                 if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     int position = recyclerView.getChildLayoutPosition(child);
                     Note selectedNote = mNotes.get(position);
-
-                    //now we have the selected note
-
+                    Intent editorIntent = new Intent(getActivity(), NoteEditorActivity.class);
+                    editorIntent.putExtra("id", selectedNote.getId());
                 }
                 return false;
             }
@@ -101,7 +100,7 @@ public class NoteListFragment extends Fragment {
             }
         });
 
-        mNotes = SampleData.getSampleNotes();
+        mNotes = NoteManager.newInstance(getActivity()).getAllNotes();
         mAdapter = new NoteListAdapter(mNotes, getActivity());
         mRecyclerView.setAdapter(mAdapter);
     }

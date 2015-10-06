@@ -66,12 +66,24 @@ public class NoteManager {
         if (cursor != null){
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
-                notes.add(Note.fromCursor(cursor));
+                notes.add(Note.getNotefromCursor(cursor));
                 cursor.moveToNext();
             }
             cursor.close();
         }
         return notes;
+    }
+
+    public Note getNote(Long id) {
+        Note note;
+        Cursor cursor = mContext.getContentResolver().query(NoteContentProvider.CONTENT_URI,
+                Constants.COLUMNS, Constants.COLUMN_ID + " = " + id, null, null);
+        if (cursor != null){
+            cursor.moveToFirst();
+            note = Note.getNotefromCursor(cursor);
+            return note;
+        }
+        return null;
     }
 
 
