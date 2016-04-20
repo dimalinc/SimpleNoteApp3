@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.okason.simplenotepad.R;
 import com.okason.simplenotepad.models.Note;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,7 +42,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         holder.noteTitle.setText(mNotes.get(position).getTitle());
-        holder.noteCreateDate.setText(mNotes.get(position).getReadableModifiedDate());
+        holder.noteCreateDate.setText(getReadableModifiedDate(mNotes.get(position).getDateModified()));
     }
 
     @Override
@@ -61,6 +63,13 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
         }
 
     }
+
+    public static String getReadableModifiedDate(long date){
+
+        String displayDate = new SimpleDateFormat("MMM dd, yyyy - h:mm a").format(new Date(date));
+        return displayDate;
+    }
+
 
 
     public void promptForDelete(final int position){

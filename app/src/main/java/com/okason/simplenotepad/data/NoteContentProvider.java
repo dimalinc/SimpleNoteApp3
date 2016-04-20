@@ -20,7 +20,7 @@ import java.util.HashSet;
 public class NoteContentProvider extends ContentProvider {
     private DatabaseHelper dbHelper;
 
-    private static final String BASE_PATH_NOTE = "notes";
+    private static final String BASE_PATH_NOTE = "note";
     private static final String AUTHORITY = "com.okason.simplenotesapp.data.provider";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH_NOTE);
     private static final int NOTE = 100;
@@ -56,10 +56,11 @@ public class NoteContentProvider extends ContentProvider {
 
         int type = URI_MATCHER.match(uri);
         switch (type){
-            case NOTE:
-                //there is not to do if the query is for the table
-                break;
             case NOTES:
+                queryBuilder.setTables(Constants.NOTES_TABLE);
+                break;
+            case NOTE:
+                queryBuilder.setTables(Constants.NOTES_TABLE);
                 queryBuilder.appendWhere(Constants.COLUMN_ID + " = " + uri.getLastPathSegment());
                 break;
             default:

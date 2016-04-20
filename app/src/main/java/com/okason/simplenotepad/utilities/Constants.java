@@ -19,6 +19,7 @@ public class Constants {
             Constants.COLUMN_ID,
             Constants.COLUMN_TITLE,
             Constants.COLUMN_CONTENT,
+            Constants.COLUMN_MODIFIED_TIME,
             Constants.COLUMN_CREATED_TIME
     };
 }
