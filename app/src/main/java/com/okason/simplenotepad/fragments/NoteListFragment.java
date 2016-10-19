@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -75,16 +76,35 @@ public class NoteListFragment extends Fragment {
                     }
                 });
 
+        mNotes = NoteManager.newInstance(getActivity()).getAllNotes();
+        mAdapter = new NoteListAdapter(mNotes, getActivity());
+        mRecyclerView.setAdapter(mAdapter);
+
         mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
             public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+
+              //  Log.d("myLogs","inside the ItemTouchListener");
+
                 View child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
 
                 if (child != null && mGestureDetector.onTouchEvent(motionEvent)) {
                     int position = recyclerView.getChildLayoutPosition(child);
+
+                //    Log.d("myLogs","position = " + position);
+
                     Note selectedNote = mNotes.get(position);
+
+                 //   Log.d("myLogs","selectedNote ID = " + selectedNote.getId());
+
+
                     Intent editorIntent = new Intent(getActivity(), NoteEditorActivity.class);
                     editorIntent.putExtra("id", selectedNote.getId());
+
+
+                    // TODO оставить или убрать? эту строчку я добавлял сам
+                    startActivity(editorIntent);
+
                 }
                 return false;
             }
@@ -100,9 +120,7 @@ public class NoteListFragment extends Fragment {
             }
         });
 
-        mNotes = NoteManager.newInstance(getActivity()).getAllNotes();
-        mAdapter = new NoteListAdapter(mNotes, getActivity());
-        mRecyclerView.setAdapter(mAdapter);
+
     }
 
 

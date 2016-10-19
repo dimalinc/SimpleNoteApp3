@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,6 +39,7 @@ public class NotePlainEditorFragment extends Fragment {
        public static NotePlainEditorFragment newInstance(long id){
         NotePlainEditorFragment fragment = new NotePlainEditorFragment();
 
+          // Log.d("myLogs","inside Fragment newInstance id = " + id  );
         if (id > 0){
             Bundle bundle = new Bundle();
             bundle.putLong("id", id);
@@ -49,9 +51,20 @@ public class NotePlainEditorFragment extends Fragment {
     private void getCurrentNote(){
         Bundle args = getArguments();
         if (args != null && args.containsKey("id")){
+
+          //  Log.d("myLogs","inside NotePlainEditorFragment");
+
             long id = args.getLong("id", 0);
+           // Log.d("myLogs","args.getLong(\"id\", 0); = " + id);
+
             if (id > 0){
                 mCurrentNote = NoteManager.newInstance(getActivity()).getNote(id);
+
+               // TODO добавлено мной для теста - хз может убрать
+
+
+
+              //  Log.d("myLogs", "got mCurrentNote = " + mCurrentNote.getId());
             }
         }
     }
@@ -61,6 +74,9 @@ public class NotePlainEditorFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         getCurrentNote();
+
+        // TODO я добавил - убрать или оставить?
+        //onResume();
     }
 
     @Override

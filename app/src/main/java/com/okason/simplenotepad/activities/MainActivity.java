@@ -21,6 +21,7 @@ import com.mikepenz.materialize.util.KeyboardUtil;
 import com.okason.simplenotepad.R;
 import com.okason.simplenotepad.data.DatabaseHelper;
 import com.okason.simplenotepad.fragments.NoteListFragment;
+import com.okason.simplenotepad.fragments.NotePlainEditorFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false); //remove this line in the MainActivity.java
+       // getSupportActionBar().setDisplayHomeAsUpEnabled(false); //remove this line in the MainActivity.java
+
+        /*if (savedInstanceState == null){
+            NotePlainEditorFragment fragment = new NotePlainEditorFragment();
+            openFragment(fragment, "Note Editor");
+        }*/
 
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
         databaseHelper.getWritableDatabase();

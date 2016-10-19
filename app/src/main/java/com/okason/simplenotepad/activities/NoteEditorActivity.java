@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,14 +28,29 @@ public class NoteEditorActivity extends AppCompatActivity {
 
         if (savedInstanceState == null){
             Bundle args = getIntent().getExtras();
-            if (args != null && args.containsKey("id")){
-                long id = args.getLong("id", 0);
-                if (id > 0){
-                    openFragment(NotePlainEditorFragment.newInstance(id), "Editor");
+            if (args != null) {
+                Log.d("myLogs", "in NoteEditorActivity.onCreate fragment bundle args != null ");
+
+                if (args.containsKey("id")) {
+                    Log.d("myLogs", "in NoteEditorActivity.onCreate fragment bundle  args.containsKey(\"id\") ");
+
+                    long id = args.getLong("id", 0);
+
+                    Log.d("myLogs", "in NoteEditorActivity.onCreate fragment bundle args id = " + id);
+
+                    if (id > 0) {
+                        openFragment(NotePlainEditorFragment.newInstance(id), "Editor");
+                    }
                 }
+            } else {
+                Log.d("myLogs","no fragment bundle args in NoteEditorActivity.onCreate");
+                openFragment(NotePlainEditorFragment.newInstance(0), "Editor");
             }
-            openFragment(NotePlainEditorFragment.newInstance(0), "Editor");
-        }
+
+
+
+
+         }
     }
 
     @Override
