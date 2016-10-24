@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+    android:baselineAligned="false">
 
     <EditText
         android:id="@+id/edit_text_title"
@@ -16,6 +17,12 @@
         android:singleLine="true"
         android:textStyle="bold" />
 
+
+    <Button
+        android:text="TakePhoto"
+        android:layout_width="102dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button" />
 
     <EditText
         android:id="@+id/edit_text_note"
