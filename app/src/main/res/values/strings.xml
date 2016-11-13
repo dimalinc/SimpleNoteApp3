@@ -22,5 +22,10 @@
     <string name="finishPhotoActivity">Finish PhotoActivity</string>
     <string name="finish">Finish</string>
 
+    <string name="picture">Picture</string>
+    <string name="select_intro">Long-press a thumbnail to add an image</string>
+    <string name="show_intro">Press a thumbnail to display at larger size</string>
+
+
 
 </resources>
